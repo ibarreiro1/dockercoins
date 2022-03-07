@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata: 
+  name: sts-redis
+spec: 
+  replicas: 1
+  selector: 
+    dockercoins: redis
+  serviceName: redis
+  template:
+    metadata:
+      labels: 
+        dockercoins: redis
+    spec:
+      containers:
+        -
+          args:
+            -
+              redis-server
+          command:
+            -
+              docker-entrypoint.sh
+          env:
+            -
+              name: TOKEN
+              value: hola que tal
+          image: redis:latest
+          name: container
+          ports:
+            -
+              containerPort: 6379
+              protocol: TCP
+          volumeMounts:
+            -
+              mountPath: /data/
+              name: volume
+              readOnly: true
+          workingDir: /data/
+  volumeClaimTemplates:
+    -
+      metadata:
+      spec:
