@@ -39,4 +39,14 @@ spec:
   volumeClaimTemplates:
     -
       metadata:
-      spec:
+        name: volume
+      spec: 
+        accessModes: 
+          - ReadWriteOnce
+        resources:
+          limits:
+            storage: 1Gi
+          requests: 
+            storage: 1Gi
+        #storageClassName: gp2 
+        volumeMode: Filesystem
