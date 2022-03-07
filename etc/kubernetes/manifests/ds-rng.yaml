@@ -5,7 +5,8 @@ metadata:
 spec: 
   replicas: 1
   selector: 
-    dockercoins: rng
+    matchLabels:
+      dockercoins: rng
   template:
     metadata:
       labels: 
