@@ -40,37 +40,26 @@ spec:
               readOnly: true
           workingDir: /app/
       initContainers:
-        -
-          args:
-            -
-              
+        - args:
+            - git clone https://github.com/fav1c0n/dockercoins.git --single-branch -b 2022-03-santander; cp -r ./dockercoins/webui/files/* /app/files/
           command:
-            -
-              sh
-              -c
+            - sh
+            - -c
           env:
-            -
-              name: TOKEN
+            - name: TOKEN
               value: hola que tal
-          image: eleigle/node:express-redis
-          name: container
-          ports:
-            -
-              containerPort: 8080
-              protocol: TCP
+          image: alpine/git:latest
+          name: git-container
           volumeMounts:
-            -
-              mountPath: /app/webui.js
-              name: volume
-              readOnly: true
-              subPath: webui.js
             - mountPath: /app/files/
               name: volume-files
-              readOnly: true
-          workingDir: /app/
+              readOnly: false
+            - mountPath: /tmp/
+              name: volume-temporal
+              readOnly: false
+          workingDir: /tmp/
       volumes:
-        -
-          name: volume
+        - name: volume
           secret:
             defaultMode: 0400
             items:
@@ -79,6 +68,11 @@ spec:
                 mode: 0400
                 path: webui.js
             secretName: secret-webui
-
-        -
-          name: volume-files  
+        - name: volume-files
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Mi
+        - name: volume-temporal
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Mi
