@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: svc-webui
 spec:
-  port:
+  ports:
     - port: 80
       protocol: TCP
       targetPort: 8080
