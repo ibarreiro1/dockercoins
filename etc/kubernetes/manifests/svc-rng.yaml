@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: rng
 spec:
-  port:
+  ports:
     - port: 8082
       protocol: TCP
       targetPort: 8082
