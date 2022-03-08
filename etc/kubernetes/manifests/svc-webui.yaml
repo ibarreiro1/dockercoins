@@ -8,6 +8,6 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    dockercoins: xxx
+    dockercoins: webui
   type: ClusterIP
   
