@@ -2,8 +2,7 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata: 
   name: ds-rng
-spec: 
-  replicas: 1
+spec:
   selector: 
     matchLabels:
       dockercoins: rng
